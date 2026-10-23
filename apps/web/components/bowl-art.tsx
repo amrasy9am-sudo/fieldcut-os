@@ -1,4 +1,4 @@
-import type { ProteinKind } from "@/lib/menu";
+import type { ProteinKind } from "@fieldcut/core";
 
 const PROTEIN: Record<ProteinKind, { fill: string; stroke: string }> = {
   chicken: { fill: "#C88845", stroke: "#7A4A1F" },
@@ -13,15 +13,7 @@ const LEAVES = [
 ];
 
 /** A simple illustrated top-down salad bowl, drawn in SVG so it loads instantly. */
-export function BowlArt({
-  protein,
-  size = 120,
-  className,
-}: {
-  protein: ProteinKind;
-  size?: number;
-  className?: string;
-}) {
+export function BowlArt({ protein, size = 120, className }: { protein: ProteinKind; size?: number; className?: string }) {
   const p = PROTEIN[protein];
   return (
     <svg width={size} height={size} viewBox="0 0 200 200" aria-hidden="true" className={className}>
@@ -29,15 +21,7 @@ export function BowlArt({
       <circle cx="100" cy="100" r="86" fill="#AF8B5C" />
       <circle cx="100" cy="100" r="81" fill="#4E8A35" />
       {LEAVES.map(([x, y, r], i) => (
-        <ellipse
-          key={i}
-          cx={x}
-          cy={y}
-          rx="22"
-          ry="12"
-          transform={`rotate(${r} ${x} ${y})`}
-          fill={i % 2 ? "#8EC75B" : "#7DB84F"}
-        />
+        <ellipse key={i} cx={x} cy={y} rx="22" ry="12" transform={`rotate(${r} ${x} ${y})`} fill={i % 2 ? "#8EC75B" : "#7DB84F"} />
       ))}
       {[[70, 42], [96, 34], [122, 40]].map(([x, y], i) => (
         <circle key={i} cx={x} cy={y} r="11" fill="#E4F2C9" stroke="#4F8F35" strokeWidth="3" />
@@ -49,8 +33,7 @@ export function BowlArt({
         <path key={i} d={`M${x} ${y} l10 6`} stroke="#EE8A2E" strokeWidth="3.4" strokeLinecap="round" />
       ))}
       {protein === "salmon" ? (
-        <rect x="108" y="82" width="62" height="34" rx="12" fill={p.fill} stroke={p.stroke}
-          transform="rotate(-25 139 99)" />
+        <rect x="108" y="82" width="62" height="34" rx="12" fill={p.fill} stroke={p.stroke} transform="rotate(-25 139 99)" />
       ) : protein === "egg" ? (
         [[128, 92], [150, 116], [120, 128]].map(([x, y], i) => (
           <g key={i}>

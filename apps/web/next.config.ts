@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // The domain package ships TypeScript source; Next compiles it with the app.
+  transpilePackages: ["@fieldcut/core"],
   turbopack: {
     rules: {
       "*.css": {

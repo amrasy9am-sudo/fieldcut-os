@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 /** Fieldcut mark: a rising sun cut by the horizon, with one leaf. */
 export function LogoMark({ size = 32 }: { size?: number }) {
   return (
@@ -11,13 +13,16 @@ export function LogoMark({ size = 32 }: { size?: number }) {
   );
 }
 
-export function Logo() {
+export function Logo({ href = "/", sub }: { href?: string; sub?: string }) {
   return (
-    <span className="inline-flex items-center gap-2 text-loam">
+    <Link href={href} className="inline-flex items-center gap-2" aria-label="Fieldcut home">
       <LogoMark />
-      <span className="font-display text-2xl font-semibold tracking-tight">
-        fieldcut<span className="text-dawn">.</span>
+      <span className="leading-none">
+        <span className="font-display text-2xl font-semibold tracking-tight">
+          fieldcut<span className="text-dawn">.</span>
+        </span>
+        {sub && <span className="block text-[9px] font-extrabold uppercase tracking-[0.3em] opacity-60">{sub}</span>}
       </span>
-    </span>
+    </Link>
   );
 }

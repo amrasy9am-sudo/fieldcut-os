@@ -22,3 +22,24 @@ body {
   background: var(--color-oat);
   color: var(--color-loam);
 }
+
+/* Thermal label printing: 50 × 30 mm, one label per page */
+@media print {
+  @page {
+    size: 50mm 30mm;
+    margin: 0;
+  }
+  body {
+    background: white;
+  }
+  .label {
+    width: 50mm;
+    height: 30mm;
+    padding: 1.5mm 2mm !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: 6.5pt !important;
+    break-after: page;
+    overflow: hidden;
+  }
+}
