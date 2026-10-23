@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Fieldcut brand tokens — used as Tailwind classes like bg-oat, text-loam, text-field */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-loam: #1e2b23;
+  --color-field: #2e5b3b;
+  --color-sprout: #9bc25b;
+  --color-dawn: #f29e4c;
+  --color-radish: #c84b3a;
+  --color-kraft: #c8a678;
+  --color-oat: #f6f2ea;
+  --color-mist: #e8ede2;
+  --color-line: #e2dbcc;
+  --color-muted: #5e6b61;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-jetbrains);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-oat);
+  color: var(--color-loam);
 }
