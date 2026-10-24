@@ -18,10 +18,24 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.PUBLIC_BASE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Fieldcut Kitchen — Cut at dawn. Eaten by noon.",
   description:
     "Pre-order weighed salad bowls in Seri Manjung, Sitiawan and Lumut. Order by 10 pm, confirm on WhatsApp, pay on hand-over.",
+  // Link previews (LinkedIn, WhatsApp). The image is app/opengraph-image.png, resolved against metadataBase.
+  openGraph: {
+    type: "website",
+    siteName: "Fieldcut Kitchen",
+    title: "Fieldcut OS · pre-order salad bowls with WhatsApp hand-off",
+    description:
+      "Build a bowl, book a slot the kitchen can really make, and send a tamper-evident order to WhatsApp. Live demo with the kitchen console.",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
