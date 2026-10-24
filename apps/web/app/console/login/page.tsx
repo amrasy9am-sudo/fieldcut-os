@@ -2,13 +2,21 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { LoginForm } from "@/components/console/login-form";
 import { Logo } from "@/components/logo";
-import { usingDevPassword } from "@/server/auth";
+import { consolePassword, usingDevPassword } from "@/server/auth";
+import { isDemo } from "@/server/demo";
 import { connection } from "next/server";
 
 export const metadata: Metadata = { title: "Sign in · Fieldcut console", robots: { index: false } };
 
 async function DevHint() {
   await connection();
+  if (isDemo()) {
+    return (
+      <p className="mt-4 rounded-xl bg-[#E4EEDF] p-3 text-xs text-field">
+        Live demo: the password is <b className="font-mono">{consolePassword()}</b>. Sample orders reload whenever the demo restarts.
+      </p>
+    );
+  }
   return usingDevPassword() ? (
     <p className="mt-4 rounded-xl bg-[#FCE3C6] p-3 text-xs text-[#9A5410]">
       Development mode: the password is <b className="font-mono">fieldcut</b>. Set <span className="font-mono">CONSOLE_PASSWORD</span> in <span className="font-mono">.env.local</span> before going live.

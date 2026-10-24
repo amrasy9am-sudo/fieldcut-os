@@ -125,17 +125,22 @@ Copy `apps/web/.env.example` to `apps/web/.env.local`:
 | `ORDER_SIGNING_SECRET` | Signs verify codes and sessions. Optional: if unset in production, a random key is generated on first start and kept in the data folder |
 | `PUBLIC_BASE_URL` | Base URL used in tracking links inside WhatsApp messages. Falls back to `RAILWAY_PUBLIC_DOMAIN`, then the request host |
 | `FIELDCUT_DATA_DIR` | Folder for the SQLite database and generated key. Defaults to `apps/web/.data` |
+| `FIELDCUT_DEMO` | `1` turns on public-demo mode: a banner, the console password on the sign-in page, and sample orders loaded into an empty database |
 
 ## Deploy
 
 The repository ships a `Dockerfile`, so it runs on any host with a persistent disk. SQLite needs that disk, so serverless platforms are not a fit (see the roadmap).
 
-**Railway (recommended)**
+**Render: free public demo**
 
-1. New Project → Deploy from GitHub repo → `fieldcut-os`. Railway detects the `Dockerfile`.
-2. Add a **Volume** to the service, mounted at `/data`. Orders and the signing key live there and survive redeploys.
-3. Add the variable `CONSOLE_PASSWORD`.
-4. Settings → Networking → **Generate Domain** (target port `3000`).
+`render.yaml` is a Blueprint for the free plan in Singapore with demo mode on. New → Blueprint → pick this repository → Apply. The free plan sleeps after 15 minutes idle and has no disk, so the database resets on wake and demo mode reloads sample orders.
+
+**Railway, or Render with a disk: real use**
+
+1. Deploy the repository as a Docker service. Both hosts detect the `Dockerfile`.
+2. Attach a persistent **volume / disk** mounted at `/data`. Orders and the signing key live there and survive redeploys.
+3. Set `CONSOLE_PASSWORD` to your own password, and leave `FIELDCUT_DEMO` unset.
+4. Give the service a public domain.
 
 **Any Docker host**
 

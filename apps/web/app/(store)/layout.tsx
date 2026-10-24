@@ -3,11 +3,15 @@ import { Suspense } from "react";
 import { KITCHEN_WHATSAPP, KITCHEN_WHATSAPP_DISPLAY } from "@fieldcut/core";
 import { CartLink } from "@/components/cart-link";
 import { CutoffChip } from "@/components/cutoff-chip";
+import { DemoBanner } from "@/components/demo-banner";
 import { Logo } from "@/components/logo";
 
 export default function StoreLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="flex min-h-full flex-1 flex-col">
+      <Suspense fallback={null}>
+        <DemoBanner />
+      </Suspense>
       <header className="sticky top-0 z-30 border-b border-line bg-oat/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <Logo />

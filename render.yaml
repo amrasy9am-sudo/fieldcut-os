@@ -1,0 +1,16 @@
+# Render Blueprint for the public portfolio demo (free plan).
+# The free plan has no persistent disk, so the database resets whenever the service sleeps or redeploys;
+# demo mode reloads sample orders on start. For real use, pick a paid plan, attach a disk at /data,
+# remove FIELDCUT_DEMO and set your own CONSOLE_PASSWORD.
+services:
+  - type: web
+    name: fieldcut-os
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /
+    envVars:
+      - key: FIELDCUT_DEMO
+        value: "1"
+      - key: CONSOLE_PASSWORD
+        value: fieldcut

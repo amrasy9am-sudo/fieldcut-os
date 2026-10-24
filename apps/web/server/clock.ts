@@ -1,5 +1,6 @@
 import "server-only";
 import { connection } from "next/server";
+import { ensureDemoData } from "./demo";
 import { expireHolds } from "./repo";
 
 /**
@@ -9,6 +10,7 @@ import { expireHolds } from "./repo";
 export async function requestNow(): Promise<Date> {
   await connection();
   const now = new Date();
+  ensureDemoData(now);
   expireHolds(now);
   return now;
 }
