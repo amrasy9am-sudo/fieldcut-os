@@ -7,6 +7,8 @@ Customers build a bowl, book a delivery slot the kitchen can really make, and se
 The owner verifies it, and the system turns tomorrow's orders into a weighed prep list, thermal labels and delivery routes.
 **No online payment, by design.**
 
+**[Live demo → fieldcut-os.vercel.app](https://fieldcut-os.vercel.app)** · kitchen console at [/console](https://fieldcut-os.vercel.app/console) (demo password `fieldcut`)
+
 ![Next.js](https://img.shields.io/badge/Next.js-16-black) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6) ![SQLite](https://img.shields.io/badge/SQLite-node%3Asqlite-003B57) ![Tailwind](https://img.shields.io/badge/Tailwind-4-38BDF8) ![Tests](https://img.shields.io/badge/tests-unit%20%2B%20e2e-2E5B3B) ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 <img src="docs/screenshots/home.png" alt="Fieldcut storefront" width="800" />
