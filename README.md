@@ -131,6 +131,10 @@ Copy `apps/web/.env.example` to `apps/web/.env.local`:
 
 The repository ships a `Dockerfile`, so it runs on any host with a persistent disk. SQLite needs that disk, so serverless platforms are not a fit (see the roadmap).
 
+**Vercel: free public demo**
+
+Import the repository on Vercel, set **Root Directory** to `apps/web`, and add `FIELDCUT_DEMO=1`. Only `/tmp` is writable on Vercel, so each serverless instance keeps its own sample database that resets when the instance is recycled. Demo mode also falls back to the console password `fieldcut` and a signing key derived from the project ID. Use it for the portfolio demo only.
+
 **Render: free public demo**
 
 `render.yaml` is a Blueprint for the free plan in Singapore with demo mode on. New → Blueprint → pick this repository → Apply. The free plan sleeps after 15 minutes idle and has no disk, so the database resets on wake and demo mode reloads sample orders.

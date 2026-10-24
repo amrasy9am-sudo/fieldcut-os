@@ -2,6 +2,7 @@ import "server-only";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
+import { DEMO_CONSOLE_PASSWORD, isDemo } from "./mode";
 import { hmac, safeEqual } from "./verify";
 
 const SESSION_COOKIE = "fc_console";
@@ -11,6 +12,7 @@ const SESSION_HOURS = 12;
 export function consolePassword(): string | null {
   const p = process.env.CONSOLE_PASSWORD;
   if (p && p.length >= 6) return p;
+  if (isDemo()) return DEMO_CONSOLE_PASSWORD;
   return process.env.NODE_ENV === "production" ? null : "fieldcut";
 }
 

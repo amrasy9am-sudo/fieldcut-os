@@ -1,9 +1,10 @@
 import "server-only";
-import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { bytesToCode, canonicalJSON } from "@fieldcut/core";
 import { dataDir } from "./data-dir";
+import { isDemo } from "./mode";
 
 const DEV_SECRET = "dev-only-secret-do-not-use-in-production";
 
@@ -11,14 +12,19 @@ let cached: string | undefined;
 
 /**
  * The HMAC key behind verify codes and console sessions.
- * ORDER_SIGNING_SECRET wins when set. In production without it, a random key is generated once
- * and kept beside the database, so codes and sessions survive restarts and redeploys.
+ * ORDER_SIGNING_SECRET wins when set. A public demo without it derives a stable key from the project,
+ * so every serverless instance agrees (its data is sample data anyway). Otherwise, in production,
+ * a random key is generated once and kept beside the database, so codes and sessions survive restarts.
  */
 export function signingSecret(): string {
   if (cached) return cached;
   const s = process.env.ORDER_SIGNING_SECRET;
   if (s && s.length >= 16) return (cached = s);
   if (process.env.NODE_ENV !== "production") return (cached = DEV_SECRET);
+  if (isDemo()) {
+    const project = process.env.VERCEL_PROJECT_ID ?? process.env.RENDER_SERVICE_ID ?? "fieldcut";
+    return (cached = createHash("sha256").update(`fieldcut-demo:${project}`).digest("base64url"));
+  }
 
   const file = path.join(dataDir(), "signing.key");
   try {
