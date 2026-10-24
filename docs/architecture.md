@@ -65,7 +65,7 @@ Settlement (`UNSETTLED → SETTLED / WAIVED`) is a separate field: money is not 
 | Double submit | Idempotency key per checkout; unique index on `orders.idem_key` |
 | Console access | Password + HMAC-signed, httpOnly session cookie; every console action calls `requireOwner()` |
 | Customer privacy | Tracking requires the phone's last 4 digits (or the device that placed the order); console masks phone numbers in lists |
-| Secrets | `ORDER_SIGNING_SECRET` and `CONSOLE_PASSWORD` are required in production; the app refuses to run without them |
+| Secrets | The console refuses sign-in in production until `CONSOLE_PASSWORD` is set. `ORDER_SIGNING_SECRET` comes from the environment or, if absent, a 256-bit key generated once and stored with mode 0600 beside the database |
 
 ## Rendering with Cache Components
 

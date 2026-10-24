@@ -121,9 +121,28 @@ Copy `apps/web/.env.example` to `apps/web/.env.local`:
 
 | Variable | Purpose |
 |---|---|
-| `CONSOLE_PASSWORD` | Console password (required in production) |
-| `ORDER_SIGNING_SECRET` | Signs verify codes and sessions, 16+ random characters (required in production) |
-| `PUBLIC_BASE_URL` | Base URL used in tracking links inside WhatsApp messages |
+| `CONSOLE_PASSWORD` | Console password, 6+ characters (required in production) |
+| `ORDER_SIGNING_SECRET` | Signs verify codes and sessions. Optional: if unset in production, a random key is generated on first start and kept in the data folder |
+| `PUBLIC_BASE_URL` | Base URL used in tracking links inside WhatsApp messages. Falls back to `RAILWAY_PUBLIC_DOMAIN`, then the request host |
+| `FIELDCUT_DATA_DIR` | Folder for the SQLite database and generated key. Defaults to `apps/web/.data` |
+
+## Deploy
+
+The repository ships a `Dockerfile`, so it runs on any host with a persistent disk. SQLite needs that disk, so serverless platforms are not a fit (see the roadmap).
+
+**Railway (recommended)**
+
+1. New Project → Deploy from GitHub repo → `fieldcut-os`. Railway detects the `Dockerfile`.
+2. Add a **Volume** to the service, mounted at `/data`. Orders and the signing key live there and survive redeploys.
+3. Add the variable `CONSOLE_PASSWORD`.
+4. Settings → Networking → **Generate Domain** (target port `3000`).
+
+**Any Docker host**
+
+```bash
+docker build -t fieldcut-os .
+docker run -p 3000:3000 -v fieldcut-data:/data -e CONSOLE_PASSWORD=your-password fieldcut-os
+```
 
 ## Scripts
 

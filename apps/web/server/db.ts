@@ -1,8 +1,8 @@
 import "server-only";
-import fs from "node:fs";
 import path from "node:path";
 import type { DatabaseSync } from "node:sqlite";
 import { BOWLS, DEFAULT_SLOTS } from "@fieldcut/core";
+import { dataDir } from "./data-dir";
 
 /**
  * Embedded SQLite through Node's built-in node:sqlite driver: zero setup for local development.
@@ -100,9 +100,7 @@ CREATE INDEX IF NOT EXISTS order_events_order ON order_events (order_id, id);
 
 function open(): DatabaseSync {
   const sqlite = process.getBuiltinModule("node:sqlite");
-  const dir = path.join(process.cwd(), ".data");
-  fs.mkdirSync(dir, { recursive: true });
-  const db = new sqlite.DatabaseSync(path.join(dir, "fieldcut.db"));
+  const db = new sqlite.DatabaseSync(path.join(dataDir(), "fieldcut.db"));
   db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;");
   const version = (db.prepare("PRAGMA user_version").get() as { user_version: number }).user_version;
   if (version < SCHEMA_VERSION) {
