@@ -9,7 +9,7 @@ The owner verifies it, and the system turns tomorrow's orders into a weighed pre
 
 **[Live demo → fieldcut-os.vercel.app](https://fieldcut-os.vercel.app)** · kitchen console at [/console](https://fieldcut-os.vercel.app/console) (demo password `fieldcut`)
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6) ![SQLite](https://img.shields.io/badge/SQLite-node%3Asqlite-003B57) ![Tailwind](https://img.shields.io/badge/Tailwind-4-38BDF8) ![Tests](https://img.shields.io/badge/tests-unit%20%2B%20e2e-2E5B3B) ![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Next.js](https://img.shields.io/badge/Next.js-16-black) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6) ![SQLite](https://img.shields.io/badge/SQLite-node%3Asqlite-003B57) ![Tailwind](https://img.shields.io/badge/Tailwind-4-38BDF8) ![Tests](https://img.shields.io/badge/tests-unit%20%2B%20e2e-2E5B3B) ![License](https://img.shields.io/badge/license-All%20rights%20reserved-lightgrey)
 
 <img src="docs/screenshots/home.png" alt="Fieldcut storefront" width="800" />
 
@@ -187,4 +187,4 @@ docker run -p 3000:3000 -v fieldcut-data:/data -e CONSOLE_PASSWORD=your-password
 
 Built by **Mohamad Amirul Asyraf** as the operating system for Fieldcut Kitchen, a pre-order salad-bowl brand in Seri Manjung, Perak. The business plan and full product specification are in the Fieldcut Business & Platform Proposal.
 
-MIT licensed.
+© 2026 Mohamad Amirul Asyraf. All rights reserved. Source shared for portfolio viewing only; not licensed for reuse. See [LICENSE](LICENSE).

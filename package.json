@@ -1,5 +1,6 @@
 {
   "name": "fieldcut-os",
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "dev": "pnpm --filter web dev",
